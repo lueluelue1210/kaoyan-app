@@ -194,6 +194,27 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
 .tab:nth-child(2).active{background:var(--mint)}
 
 @media(max-width:400px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+/* ============ 浏览/搜索页 ============ */
+.search-bar{margin-bottom:12px}
+.search-bar input{
+  width:100%;padding:12px 16px;font-size:15px;font-family:inherit;
+  color:var(--ink);background:var(--card);
+  border:2px solid var(--ink);border-radius:var(--radius-s);
+  box-shadow:3px 3px 0 rgba(59,59,69,.12);outline:none;
+}
+.search-bar input:focus{background:var(--paper)}
+.browse-q{padding:12px 14px;margin-bottom:12px}
+.browse-title{font-size:15px;font-weight:700;line-height:1.6;margin:8px 0}
+.browse-answer{
+  max-height:0;overflow:hidden;transition:max-height .35s ease,margin .3s;
+  white-space:pre-line;font-size:14px;line-height:1.8;color:var(--ink-soft);
+}
+.browse-answer.show{
+  max-height:8000px;margin-bottom:10px;padding:12px;
+  background:var(--paper);border:1.5px dashed var(--ink-soft);
+  border-radius:var(--radius-s);color:var(--ink);
+}
+.browse-toggle{margin-top:4px}
 </style>
 <base target="_blank">
 </head>
@@ -204,7 +225,7 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
   <div class="topbar">
     <div class="brand">
       <svg viewBox="0 0 24 24" class="ic"><path d="M4 5c3-1.5 6-1.5 8 0 2-1.5 5-1.5 8 0v13c-3-1.5-6-1.5-8 0-2-1.5-5-1.5-8 0z"/><path d="M12 5v13"/></svg>
-      <div><div class="t hand">考研背诵</div><div class="sub">西哲 · 马哲 一站式刷题</div></div>
+      <div><div class="t hand">考研背诵</div><div class="sub">哲学  ·  一站式刷题</div></div>
     </div>
     <button class="icon-btn" id="btnTheme" title="切换主题">
       <svg viewBox="0 0 24 24" class="ic" id="themeIcon"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
@@ -300,7 +321,7 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
     下一题
   </button>
   <div style="text-align:center;font-size:12px;color:var(--ink-soft);margin-top:10px">
-    快捷键：空格 显隐答案 · 回车 下一题
+    今天也要努力从吃汉堡哦
   </div>
 </div>
 
@@ -335,11 +356,52 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
   </button>
 </div>
 
+<!-- ==================== 浏览页 ==================== -->
+<div class="view" id="view-browse">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      <div><div class="t hand">浏览题库</div><div class="sub">按章节查看全部题目与答案</div></div>
+    </div>
+  </div>
+
+  <div class="chips" id="browseDbChips"><span style="font-size:13px;color:var(--ink-soft)">题库</span></div>
+  <div class="chips" id="browseChChips"><span style="font-size:13px;color:var(--ink-soft)">章节</span></div>
+
+  <div id="browseList"></div>
+</div>
+
+<!-- ==================== 搜索页 ==================== -->
+<div class="view" id="view-search">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>
+      <div><div class="t hand">搜索题目</div><div class="sub">匹配题干和答案中的关键词</div></div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="输入关键词，例如：亚里士多德、实践、自由…">
+  </div>
+
+  <div class="chips" id="searchScopeChips"></div>
+
+  <div id="searchResults"></div>
+</div>
+
 <!-- ==================== 底部导航 ==================== -->
 <nav class="tabbar" id="tabbar">
   <div class="tab active" data-view="home">
     <svg viewBox="0 0 24 24" class="ic"><path d="M4 11l8-7 8 7M6 9.5V20h12V9.5"/></svg>
     首页
+  </div>
+  <div class="tab" data-view="browse">
+    <svg viewBox="0 0 24 24" class="ic"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    浏览
+  </div>
+  <div class="tab" data-view="search">
+    <svg viewBox="0 0 24 24" class="ic"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>
+    搜索
   </div>
   <div class="tab" data-view="progress">
     <svg viewBox="0 0 24 24" class="ic"><path d="M3 20h18M6 20V10M11 20V4M16 20v-9M21 20v-5"/></svg>
@@ -422,7 +484,7 @@ function loadOneDb(item){
 async function loadAllDb(){
   try{
     for(const item of DB_LIST){ $("statusTip").textContent=`正在翻书加载：${item.name}`; await loadOneDb(item); }
-    $("statusTip").textContent="题库全部加载完毕，勾选章节后开始背诵吧";
+    $("statusTip").textContent="今天也要好好背书和吃汉堡包哦，还有要好好喝水和睡觉！";
     $("statusTip").className="status-tip ok";
     $("homeMain").style.display="block";
     renderDbUi(); renderTypeFilter(); refreshAll();
@@ -766,6 +828,181 @@ document.addEventListener("keydown",e=>{
   if(!$("view-study").classList.contains("active")) return;
   if(e.code==="Space"){ e.preventDefault(); $("btnToggleAnswer").click(); }
   else if(e.key==="Enter"){ e.preventDefault(); nextQuestion(); }
+});
+
+/* ================= 浏览页 ================= */
+let browseDbId = null;
+let browseChapter = null;
+
+function renderBrowse(){
+  // 题库 chips
+  const dbChips = $("browseDbChips");
+  dbChips.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">题库</span>';
+  DB_LIST.forEach(item => {
+    const chip = document.createElement("span");
+    chip.className = "chip" + (browseDbId === item.dbId ? " on" : "");
+    chip.textContent = item.name;
+    chip.onclick = () => {
+      browseDbId = item.dbId;
+      browseChapter = null;
+      renderBrowse();
+    };
+    dbChips.appendChild(chip);
+  });
+
+  // 默认选题库
+  if (!browseDbId && DB_LIST.length) browseDbId = DB_LIST[0].dbId;
+
+  // 章节 chips
+  const chChips = $("browseChChips");
+  chChips.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">章节</span>';
+  const db = dbData[browseDbId];
+  if (db) {
+    db.chapters.forEach(ch => {
+      const chip = document.createElement("span");
+      chip.className = "chip" + (browseChapter === ch ? " on" : "");
+      chip.textContent = ch;
+      chip.onclick = () => {
+        browseChapter = (browseChapter === ch) ? null : ch;
+        renderBrowse();
+      };
+      chChips.appendChild(chip);
+    });
+  }
+
+  // 题目列表
+  const list = $("browseList");
+  list.innerHTML = "";
+  if (!db) return;
+
+  let qs = db.questions;
+  if (browseChapter) qs = qs.filter(q => q.chapter === browseChapter);
+
+  if (!qs.length) {
+    list.innerHTML = '<div class="big-empty"><div class="hand">这里还没有题目</div></div>';
+    return;
+  }
+
+  qs.forEach((q, idx) => {
+    const card = document.createElement("div");
+    card.className = "paper-card sketch browse-q";
+    card.innerHTML = `
+      <div class="q-tags">
+        <span class="qtag t">${q.type}</span>
+        <span class="qtag c">${q.chapter}</span>
+        ${q.review > 0 ? '<span class="qtag done">已背 ' + q.review + ' 次</span>' : ''}
+      </div>
+      <div class="browse-title">${idx + 1}. ${q.title}</div>
+      <div class="browse-answer">${q.answer}</div>
+      <button class="btn small primary browse-toggle">展开答案</button>
+    `;
+    const answerEl = card.querySelector(".browse-answer");
+    const btn = card.querySelector(".browse-toggle");
+    btn.onclick = () => {
+      const show = answerEl.classList.toggle("show");
+      btn.textContent = show ? "收起答案" : "展开答案";
+    };
+    list.appendChild(card);
+  });
+}
+
+/* ================= 搜索页 ================= */
+let searchScope = "all";
+
+function renderSearchScope(){
+  const wrap = $("searchScopeChips");
+  wrap.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">范围</span>';
+
+  const allChip = document.createElement("span");
+  allChip.className = "chip" + (searchScope === "all" ? " on" : "");
+  allChip.textContent = "全部题库";
+  allChip.onclick = () => { searchScope = "all"; renderSearchScope(); doSearch(); };
+  wrap.appendChild(allChip);
+
+  DB_LIST.forEach(item => {
+    const chip = document.createElement("span");
+    chip.className = "chip" + (searchScope === item.dbId ? " on" : "");
+    chip.textContent = item.name;
+    chip.onclick = () => { searchScope = item.dbId; renderSearchScope(); doSearch(); };
+    wrap.appendChild(chip);
+  });
+}
+
+function doSearch(){
+  const kw = $("searchInput").value.trim();
+  const wrap = $("searchResults");
+  wrap.innerHTML = "";
+
+  if (!kw) {
+    wrap.innerHTML = '<div class="big-empty"><div class="hand">输入关键词开始搜索</div><div>会同时匹配题干和答案</div></div>';
+    return;
+  }
+
+  const lowerKw = kw.toLowerCase();
+  let pool = [];
+  DB_LIST.forEach(item => {
+    if (searchScope !== "all" && searchScope !== item.dbId) return;
+    pool = pool.concat(dbData[item.dbId].questions);
+  });
+
+  const matches = pool.filter(q =>
+    q.title.toLowerCase().includes(lowerKw) ||
+    q.answer.toLowerCase().includes(lowerKw)
+  );
+
+  if (!matches.length) {
+    wrap.innerHTML = '<div class="big-empty"><div class="hand">没有找到匹配的题目</div><div>换个关键词试试</div></div>';
+    return;
+  }
+
+  const summary = document.createElement("div");
+  summary.style.cssText = "font-size:13px;color:var(--ink-soft);margin-bottom:10px";
+  summary.textContent = `找到 ${matches.length} 道题`;
+  wrap.appendChild(summary);
+
+  matches.forEach((q, idx) => {
+    const dbInfo = DB_LIST.find(x => x.dbId === q.dbId);
+    const card = document.createElement("div");
+    card.className = "paper-card sketch browse-q";
+    card.innerHTML = `
+      <div class="q-tags">
+        <span class="qtag d">${dbInfo.name}</span>
+        <span class="qtag t">${q.type}</span>
+        <span class="qtag c">${q.chapter}</span>
+        ${q.review > 0 ? '<span class="qtag done">已背 ' + q.review + ' 次</span>' : ''}
+      </div>
+      <div class="browse-title">${idx + 1}. ${q.title}</div>
+      <div class="browse-answer">${q.answer}</div>
+      <button class="btn small primary browse-toggle">展开答案</button>
+    `;
+    const answerEl = card.querySelector(".browse-answer");
+    const btn = card.querySelector(".browse-toggle");
+    btn.onclick = () => {
+      const show = answerEl.classList.toggle("show");
+      btn.textContent = show ? "收起答案" : "展开答案";
+    };
+    wrap.appendChild(card);
+  });
+}
+
+// 搜索输入防抖
+let searchTimer = null;
+document.addEventListener("input", e => {
+  if (e.target.id === "searchInput") {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(doSearch, 200);
+  }
+});
+
+// 点击 tab 时初始化视图
+document.querySelectorAll(".tab").forEach(t => {
+  const orig = t.onclick;
+  t.onclick = () => {
+    if (orig) orig();
+    if (t.dataset.view === "browse") renderBrowse();
+    if (t.dataset.view === "search") { renderSearchScope(); doSearch(); }
+    if (t.dataset.view === "progress") renderProgress();
+  };
 });
 
 loadAllDb();
