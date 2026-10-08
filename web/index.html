@@ -7,16 +7,11 @@
 <script src="data.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
-/* ============ 卡通手绘风格基础 ============ */
 :root{
-  --paper:#fdf9f0;            /* 纸张底色 */
-  --ink:#3b3b45;              /* 手绘墨色 */
-  --ink-soft:#8a8a96;
-  --card:#ffffff;
+  --paper:#fdf9f0; --ink:#3b3b45; --ink-soft:#8a8a96; --card:#ffffff;
   --yellow:#ffe9a8; --pink:#ffd9d4; --mint:#cdeccd; --blue:#cfe0fb; --lav:#e2d9fb;
-  --accent:#ff8f5e;           /* 橘子色主色调 */
-  --green:#5cb87a; --purple:#8b7bd8; --sky:#5b9bd5;
-  --radius:255px 15px 225px 15px/15px 225px 15px 255px;  /* 手绘不规则圆角 */
+  --accent:#ff8f5e; --green:#5cb87a; --purple:#8b7bd8; --sky:#5b9bd5;
+  --radius:255px 15px 225px 15px/15px 225px 15px 255px;
   --radius-s:15px 225px 15px 255px/255px 15px 225px 15px;
   --shadow:4px 4px 0 rgba(59,59,69,.14);
 }
@@ -36,20 +31,9 @@ body{
 .view{display:none}
 .view.active{display:block;animation:viewIn .3s ease}
 @keyframes viewIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-
-/* ============ 手绘通用件 ============ */
-.sketch{
-  background:var(--card);border:2px solid var(--ink);
-  border-radius:var(--radius);box-shadow:var(--shadow);
-}
+.sketch{background:var(--card);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow)}
 .sketch-s{border:2px solid var(--ink);border-radius:var(--radius-s)}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  border:2px solid var(--ink);background:var(--card);color:var(--ink);
-  border-radius:var(--radius-s);box-shadow:3px 3px 0 rgba(59,59,69,.18);
-  font-size:15px;padding:11px 18px;cursor:pointer;user-select:none;
-  transition:transform .12s,box-shadow .12s;font-family:inherit;font-weight:600;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:var(--radius-s);box-shadow:3px 3px 0 rgba(59,59,69,.18);font-size:15px;padding:11px 18px;cursor:pointer;user-select:none;transition:transform .12s,box-shadow .12s;font-family:inherit;font-weight:600}
 .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(59,59,69,.18)}
 .btn svg{width:18px;height:18px}
 .btn.primary{background:var(--yellow)}
@@ -58,45 +42,31 @@ body{
 .btn.ghost{background:transparent;box-shadow:none;border-style:dashed;color:var(--ink-soft)}
 .btn:disabled{opacity:.45;cursor:default}
 .btn.small{padding:7px 12px;font-size:13px}
-.icon-btn{
-  width:40px;height:40px;border:2px solid var(--ink);border-radius:var(--radius-s);
-  background:var(--card);box-shadow:3px 3px 0 rgba(59,59,69,.18);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:transform .12s;
-}
+.icon-btn{width:40px;height:40px;border:2px solid var(--ink);border-radius:var(--radius-s);background:var(--card);box-shadow:3px 3px 0 rgba(59,59,69,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .12s}
 .icon-btn:active{transform:translate(2px,2px)}
 .icon-btn svg{width:19px;height:19px}
 svg.ic{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-
-/* ============ 顶栏 ============ */
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand svg{width:34px;height:34px}
 .brand .t{font-size:26px;line-height:1}
 .topbar .sub{font-size:11px;color:var(--ink-soft);margin-top:2px}
-
-.status-tip{border:2px dashed var(--ink-soft);border-radius:var(--radius-s);
-  padding:10px 14px;font-size:13px;color:var(--ink-soft);text-align:center;margin-bottom:14px}
+.status-tip{border:2px dashed var(--ink-soft);border-radius:var(--radius-s);padding:10px 14px;font-size:13px;color:var(--ink-soft);text-align:center;margin-bottom:14px}
 .status-tip.ok{border-color:var(--green);color:var(--green)}
 .status-tip.err{border-color:#d66;color:#d66}
-
-/* ============ 统计卡 ============ */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
 .stat{padding:12px 8px;text-align:center}
 .stat .n{font-size:24px;font-weight:800}
 .stat .l{font-size:11px;color:var(--ink-soft);margin-top:2px}
 .stat.c1 .n{color:var(--accent)} .stat.c2 .n{color:var(--green)} .stat.c3 .n{color:var(--purple)}
-
 .paper-card{padding:14px 16px;margin-bottom:14px}
 .paper-title{font-size:18px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .paper-title svg{width:20px;height:20px}
 .prow{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-bottom:5px}
 .track{height:10px;border:2px solid var(--ink);border-radius:99px;background:var(--card);overflow:hidden}
-.fill{height:100%;background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 6px,#ffab84 6px,#ffab84 12px);
-  border-radius:99px;width:0;transition:width .5s ease}
+.fill{height:100%;background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 6px,#ffab84 6px,#ffab84 12px);border-radius:99px;width:0;transition:width .5s ease}
 .fill.green{background:repeating-linear-gradient(45deg,var(--green),var(--green) 6px,#7fd09b 6px,#7fd09b 12px)}
 .fill.purple{background:repeating-linear-gradient(45deg,var(--purple),var(--purple) 6px,#a99ae6 6px,#a99ae6 12px)}
-
-/* ============ 题库列表 ============ */
 .db-item{border-top:2px dashed rgba(120,120,130,.35)}
 .db-item:first-child{border-top:none}
 .db-head{display:flex;align-items:center;gap:10px;padding:11px 6px;cursor:pointer;user-select:none}
@@ -106,37 +76,26 @@ svg.ic{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-li
 .cnt{font-size:11px;border:1.5px solid var(--ink);border-radius:99px;padding:2px 9px;background:var(--blue);flex:none}
 .chapter-wrap{display:none;padding:2px 4px 12px 30px;flex-wrap:wrap;gap:8px}
 .chapter-wrap.open{display:flex}
-.ch-item{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-size:13px;
-  border:2px solid var(--ink-soft);border-radius:99px;cursor:pointer;color:var(--ink-soft);
-  background:var(--card);transition:all .15s;user-select:none}
+.ch-item{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-size:13px;border:2px solid var(--ink-soft);border-radius:99px;cursor:pointer;color:var(--ink-soft);background:var(--card);transition:all .15s;user-select:none}
 .ch-item .mini{font-size:11px}
 .ch-item .mini b{color:var(--green);font-weight:700}
 .ch-item.on{border-color:var(--ink);color:var(--ink);background:var(--yellow);box-shadow:2px 2px 0 rgba(59,59,69,.15)}
 .ch-item:hover{border-color:var(--ink);color:var(--ink)}
 input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer;flex:none}
-
-/* ============ 筛选 chips ============ */
 .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
-.chip{padding:6px 14px;font-size:13px;border:2px solid var(--ink-soft);border-radius:99px;
-  cursor:pointer;color:var(--ink-soft);background:var(--card);user-select:none;transition:all .15s}
+.chip{padding:6px 14px;font-size:13px;border:2px solid var(--ink-soft);border-radius:99px;cursor:pointer;color:var(--ink-soft);background:var(--card);user-select:none;transition:all .15s}
 .chip.on{border-color:var(--ink);color:var(--ink);background:var(--lav);box-shadow:2px 2px 0 rgba(59,59,69,.15);font-weight:600}
 .switch{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);cursor:pointer;user-select:none}
 .switch input{accent-color:var(--green);width:16px;height:16px}
 .row-flex{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-
-/* ============ 背诵页 ============ */
 .study-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .study-top .scope{flex:1;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.counter{flex:none;font-size:13px;border:2px solid var(--ink);border-radius:99px;
-  padding:4px 12px;background:var(--mint);font-weight:700}
+.counter{flex:none;font-size:13px;border:2px solid var(--ink);border-radius:99px;padding:4px 12px;background:var(--mint);font-weight:700}
 .counter.done-all{background:var(--yellow)}
 .mode-tabs{display:flex;gap:8px;margin-bottom:10px}
-.finish-banner{display:none;border:2px solid var(--ink);border-radius:var(--radius-s);
-  background:var(--yellow);padding:10px 14px;font-size:14px;margin-bottom:12px;
-  box-shadow:3px 3px 0 rgba(59,59,69,.15)}
+.finish-banner{display:none;border:2px solid var(--ink);border-radius:var(--radius-s);background:var(--yellow);padding:10px 14px;font-size:14px;margin-bottom:12px;box-shadow:3px 3px 0 rgba(59,59,69,.15)}
 .finish-banner.show{display:block;animation:pop .3s ease}
 @keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
-
 .q-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .qtag{font-size:12px;padding:3px 11px;border-radius:99px;border:1.5px solid var(--ink);font-weight:600}
 .qtag.t{background:var(--blue)} .qtag.d{background:var(--lav)} .qtag.c{background:var(--card);border-style:dashed;font-weight:400;color:var(--ink-soft)}
@@ -145,12 +104,9 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
 .q-stat{font-size:12px;color:var(--ink-soft);margin-bottom:12px}
 .answer{max-height:0;overflow:hidden;transition:max-height .45s ease,margin .3s}
 .answer.show{max-height:6000px;margin-bottom:14px}
-.answer-inner{background:var(--paper);border:2px dashed var(--ink-soft);border-radius:var(--radius-s);
-  padding:14px;white-space:pre-line;font-size:15px;line-height:1.85}
+.answer-inner{background:var(--paper);border:2px dashed var(--ink-soft);border-radius:var(--radius-s);padding:14px;white-space:pre-line;font-size:15px;line-height:1.85}
 .q-btns{display:flex;gap:10px;flex-wrap:wrap}
 .q-btns .btn{flex:1}
-
-/* ============ 进度页 ============ */
 .p-db{margin-bottom:14px;padding:12px 14px}
 .p-db .h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .p-db .h strong{flex:1;font-size:16px}
@@ -161,66 +117,99 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
 .p-ch .track{width:30%;flex:none}
 .p-ch .pc{font-size:11px;color:var(--ink-soft);width:46px;text-align:right;flex:none}
 .p-ch .pc b{color:var(--green)}
-
-/* 单条清零小按钮 */
-.mini-reset{
-  flex:none;width:26px;height:26px;padding:0;
-  border:1.5px solid var(--ink-soft);border-radius:50%;
-  background:var(--card);color:var(--ink-soft);
-  font-size:13px;line-height:1;font-family:inherit;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .15s;
-}
+.mini-reset{flex:none;width:26px;height:26px;padding:0;border:1.5px solid var(--ink-soft);border-radius:50%;background:var(--card);color:var(--ink-soft);font-size:13px;line-height:1;font-family:inherit;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
 .mini-reset:hover{border-color:var(--accent);color:var(--accent);background:var(--paper)}
 .mini-reset:active{transform:translate(1px,1px)}
-.mini-reset:disabled{opacity:.3;cursor:default}
-
 .big-empty{text-align:center;padding:40px 0;color:var(--ink-soft)}
-.big-empty svg{width:72px;height:72px;margin-bottom:12px;opacity:.6}
 .big-empty .hand{font-size:22px;margin-bottom:6px}
-
-/* ============ 底部导航 ============ */
-.tabbar{
-  position:fixed;bottom:12px;left:50%;transform:translateX(-50%);
-  width:min(420px,calc(100% - 28px));
-  display:flex;gap:8px;padding:8px;z-index:50;
-  background:var(--card);border:2px solid var(--ink);border-radius:22px;
-  box-shadow:var(--shadow);
-}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:8px 0;border-radius:16px;cursor:pointer;color:var(--ink-soft);font-size:12px;user-select:none}
+.tabbar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:min(420px,calc(100% - 28px));display:flex;gap:8px;padding:8px;z-index:50;background:rgba(255,255,255,0.72);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:2px solid var(--ink);border-radius:22px;box-shadow:var(--shadow)}
+body.dark .tabbar{background:rgba(46,46,61,0.78)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;border-radius:16px;cursor:pointer;color:var(--ink-soft);font-size:12px;user-select:none}
 .tab svg{width:21px;height:21px}
 .tab.active{background:var(--yellow);color:var(--ink);border:2px solid var(--ink)}
 .tab:nth-child(2).active{background:var(--mint)}
-
 @media(max-width:400px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
-/* ============ 浏览/搜索页 ============ */
 .search-bar{margin-bottom:12px}
-.search-bar input{
-  width:100%;padding:12px 16px;font-size:15px;font-family:inherit;
-  color:var(--ink);background:var(--card);
-  border:2px solid var(--ink);border-radius:var(--radius-s);
-  box-shadow:3px 3px 0 rgba(59,59,69,.12);outline:none;
-}
+.search-bar input{width:100%;padding:12px 16px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:var(--radius-s);box-shadow:3px 3px 0 rgba(59,59,69,.12);outline:none}
 .search-bar input:focus{background:var(--paper)}
 .browse-q{padding:12px 14px;margin-bottom:12px}
 .browse-title{font-size:15px;font-weight:700;line-height:1.6;margin:8px 0}
-.browse-answer{
-  max-height:0;overflow:hidden;transition:max-height .35s ease,margin .3s;
-  white-space:pre-line;font-size:14px;line-height:1.8;color:var(--ink-soft);
+.browse-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,margin .3s;white-space:pre-line;font-size:14px;line-height:1.8;color:var(--ink-soft)}
+.browse-answer.show{max-height:8000px;margin-bottom:10px;padding:12px;background:var(--paper);border:1.5px dashed var(--ink-soft);border-radius:var(--radius-s);color:var(--ink)}
+.browse-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.browse-actions .btn{flex:none}
+.browse-badge{display:inline-flex;align-items:center;font-size:12px;color:var(--ink-soft);padding:6px 10px;border:1.5px dashed var(--ink-soft);border-radius:99px}
+.browse-badge b{color:var(--green);margin:0 2px}
+.settings-group{padding:14px 16px;margin-bottom:14px}
+.settings-group .paper-title{margin-bottom:6px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1.5px dashed rgba(120,120,130,.3)}
+.settings-row:first-of-type{border-top:none;padding-top:0}
+.settings-row .info{flex:1;min-width:0}
+.settings-row .label{font-size:14px;font-weight:600}
+.settings-row .desc{font-size:12px;color:var(--ink-soft);margin-top:2px}
+.settings-row .value{font-size:13px;color:var(--ink-soft);word-break:break-all}
+@media (min-width: 768px){
+  body{max-width:960px;padding:20px 24px 100px}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .tabbar{width:min(680px,calc(100% - 40px));bottom:18px;padding:10px 12px}
+  .q-btns .btn{flex:1}
 }
-.browse-answer.show{
-  max-height:8000px;margin-bottom:10px;padding:12px;
-  background:var(--paper);border:1.5px dashed var(--ink-soft);
-  border-radius:var(--radius-s);color:var(--ink);
+@media (orientation: landscape) and (max-height: 500px){body{padding-bottom:80px}}
+.star-btn{flex:none;width:32px;height:32px;padding:0;border:2px solid var(--ink);border-radius:var(--radius-s);background:var(--card);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+.star-btn.on{background:var(--yellow);color:var(--ink);box-shadow:2px 2px 0 rgba(59,59,69,.15)}
+.star-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.star-btn.on svg{fill:currentColor}
+.speak-btn{flex:none;width:36px;height:36px;padding:0;border:2px solid var(--ink);border-radius:50%;background:var(--card);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s}
+.speak-btn:hover{background:var(--mint)}
+.speak-btn.speaking{background:var(--accent);border-color:var(--accent)}
+.speak-btn.speaking svg{stroke:#fff}
+.speak-btn svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2}
+.daily-card{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:14px}
+.daily-card .num{font-size:32px;font-weight:800;color:var(--accent);line-height:1;min-width:60px;text-align:center}
+.daily-card .txt{flex:1;font-size:13px;color:var(--ink-soft);line-height:1.6}
+.daily-card .txt b{color:var(--ink);font-size:15px}
+.recent-strip{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.recent-strip::-webkit-scrollbar{display:none}
+.recent-item{flex:none;width:180px;padding:10px 12px;border:2px solid var(--ink);border-radius:var(--radius-s);background:var(--card);box-shadow:3px 3px 0 rgba(59,59,69,.12);font-size:12px;line-height:1.5;cursor:pointer;transition:background .15s}
+.recent-item:hover{background:var(--yellow)}
+.recent-item .t{font-weight:700;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-history{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.hist-chip{padding:5px 12px;font-size:12px;border:2px solid var(--ink-soft);border-radius:99px;background:var(--card);color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.hist-chip:hover{border-color:var(--ink);color:var(--ink)}
+.file-input{display:none}
+.browse-ch-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;box-sizing:border-box;
+  padding:10px 18px;margin-bottom:10px;
+  border:2px solid var(--ink-soft);border-radius:99px;
+  background:var(--card);color:var(--ink-soft);
+  font-size:13px;cursor:pointer;user-select:none;
+  transition:all .15s;
 }
-.browse-toggle{margin-top:4px}
+.browse-ch-toggle:hover{border-color:var(--ink);color:var(--ink)}
+.browse-ch-toggle .arrow{transition:transform .2s;font-size:11px}
+.browse-ch-toggle.open{border-color:var(--ink);color:var(--ink);background:var(--yellow)}
+.browse-ch-toggle.open .arrow{transform:rotate(90deg)}
+.browse-ch-toggle.open .arrow{transform:rotate(90deg)}
+
+/* 浏览页题库 chips：自动均分填满 */
+#browseDbChips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+  gap:8px;
+}
+#browseDbChips .chip{
+  text-align:center;
+  padding:8px 10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 </style>
 <base target="_blank">
 </head>
 <body>
 
-<!-- ==================== 首页 ==================== -->
 <div class="view active" id="view-home">
   <div class="topbar">
     <div class="brand">
@@ -228,13 +217,21 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
       <div><div class="t hand">考研背诵</div><div class="sub">哲学  ·  一站式刷题</div></div>
     </div>
     <button class="icon-btn" id="btnTheme" title="切换主题">
-      <svg viewBox="0 0 24 24" class="ic" id="themeIcon"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
     </button>
   </div>
 
   <div class="status-tip" id="statusTip">正在翻书加载题库，请稍候……</div>
 
   <div id="homeMain" style="display:none">
+    <div class="daily-card sketch">
+      <div class="num" id="dailyDone">0</div>
+      <div class="txt">
+        今日目标 <b id="dailyGoalTxt">30</b> 题<br>
+        <span id="dailyStreak">连续打卡 0 天</span>
+      </div>
+    </div>
+
     <div class="stats">
       <div class="stat c1 sketch sketch-s"><div class="n" id="ovTotal">0</div><div class="l">已选题目</div></div>
       <div class="stat c2 sketch sketch-s"><div class="n" id="ovDone">0</div><div class="l">已背完</div></div>
@@ -259,10 +256,6 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
     </div>
 
     <div class="chips" id="typeFilter"><span style="font-size:13px;color:var(--ink-soft)">题型</span></div>
-    <div class="row-flex">
-      <label class="switch"><input type="checkbox" id="chkUnreviewed"> 优先抽未背完的题</label>
-      <label class="switch"><input type="checkbox" id="chkSkipDone"> 顺序模式跳过已背完</label>
-    </div>
 
     <div class="row-flex">
       <button class="btn accent" id="btnStartRandom" style="flex:1">
@@ -274,10 +267,20 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
         顺序背诵
       </button>
     </div>
+
+    <div class="paper-card sketch" id="recentCard" style="display:none">
+      <div class="paper-title hand" style="justify-content:space-between">
+        <span style="display:flex;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
+          最近背过
+        </span>
+        <button class="btn small ghost" id="btnClearRecent">清除</button>
+      </div>
+      <div class="recent-strip" id="recentStrip"></div>
+    </div>
   </div>
 </div>
 
-<!-- ==================== 背诵页 ==================== -->
 <div class="view" id="view-study">
   <div class="study-top">
     <button class="icon-btn" id="btnBackHome">
@@ -300,6 +303,14 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
   </div>
 
   <div class="paper-card sketch" id="studyCard">
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px">
+      <button class="star-btn" id="btnStar" title="重点">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2.8 6 6.2.6-4.7 4.1 1.4 6.3L12 16.8 6.3 20l1.4-6.3L3 9.6l6.2-.6z"/></svg>
+      </button>
+      <button class="speak-btn" id="btnSpeak" title="朗读题目和答案">
+        <svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4z"/><path d="M16 9c1.5 1.5 1.5 4.5 0 6"/></svg>
+      </button>
+    </div>
     <div class="q-tags" id="qTags"></div>
     <div class="q-title" id="qTitle"></div>
     <div class="q-stat" id="qStat"></div>
@@ -313,6 +324,10 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
         <svg viewBox="0 0 24 24" class="ic"><path d="M4.5 12.5l5 5 10-11"/></svg>
         <span id="markReviewLabel">记住了</span>
       </button>
+      <button class="btn ghost" id="btnUnmarkReview" style="display:none">
+        <svg viewBox="0 0 24 24" class="ic"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        取消标记
+      </button>
     </div>
   </div>
 
@@ -325,7 +340,6 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
   </div>
 </div>
 
-<!-- ==================== 进度页 ==================== -->
 <div class="view" id="view-progress">
   <div class="topbar">
     <div class="brand">
@@ -356,7 +370,6 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
   </button>
 </div>
 
-<!-- ==================== 浏览页 ==================== -->
 <div class="view" id="view-browse">
   <div class="topbar">
     <div class="brand">
@@ -364,14 +377,14 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
       <div><div class="t hand">浏览题库</div><div class="sub">按章节查看全部题目与答案</div></div>
     </div>
   </div>
-
-  <div class="chips" id="browseDbChips"><span style="font-size:13px;color:var(--ink-soft)">题库</span></div>
-  <div class="chips" id="browseChChips"><span style="font-size:13px;color:var(--ink-soft)">章节</span></div>
-
-  <div id="browseList"></div>
+    <div class="chips" id="browseDbChips"></div>
+  <div class="browse-ch-toggle" id="browseChToggle">
+    <span>章节</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chips" id="browseChChips" style="display:none"></div>  <div id="browseList"></div>
 </div>
 
-<!-- ==================== 搜索页 ==================== -->
 <div class="view" id="view-search">
   <div class="topbar">
     <div class="brand">
@@ -379,17 +392,128 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
       <div><div class="t hand">搜索题目</div><div class="sub">匹配题干和答案中的关键词</div></div>
     </div>
   </div>
-
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="输入关键词，例如：亚里士多德、实践、自由…">
   </div>
-
+  <div class="search-history" id="searchHistory"></div>
   <div class="chips" id="searchScopeChips"></div>
-
   <div id="searchResults"></div>
 </div>
 
-<!-- ==================== 底部导航 ==================== -->
+<div class="view" id="view-settings">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+      <div><div class="t hand">设置</div><div class="sub">偏好与关于</div></div>
+    </div>
+  </div>
+
+  <div class="paper-card sketch settings-group">
+    <div class="paper-title hand">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M3 20h18M6 20V10M11 20V4M16 20v-9M21 20v-5"/></svg>
+      背诵偏好
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">优先抽未背完的题</div>
+        <div class="desc">随机模式下，尽量先抽还没背过的题</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="chkUnreviewed"></label>
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">顺序模式跳过已背完</div>
+        <div class="desc">顺序刷题时，跳过已经标记过的题目</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="chkSkipDone"></label>
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">背完自动下一题</div>
+        <div class="desc">点“记住了”后 0.6 秒自动翻页</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="chkAutoNext"></label>
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">每日目标</div>
+        <div class="desc">每天计划背诵多少道题</div>
+      </div>
+      <input type="number" id="inpDailyGoal" min="1" max="500" value="30"
+        style="width:80px;padding:6px 10px;border:2px solid var(--ink);border-radius:12px;font-size:14px;text-align:center;background:var(--card);color:var(--ink);font-family:inherit">
+    </div>
+  </div>
+
+  <div class="paper-card sketch settings-group">
+    <div class="paper-title hand">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg>
+      数据管理
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">导出背诵记录</div>
+        <div class="desc">保存为 JSON 文件，可用于备份</div>
+      </div>
+      <button class="btn small primary" id="btnExport">导出</button>
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">导入背诵记录</div>
+        <div class="desc">从 JSON 文件恢复，会覆盖当前记录</div>
+      </div>
+      <button class="btn small good" id="btnImport">导入</button>
+      <input type="file" id="fileImport" class="file-input" accept=".json">
+    </div>
+  </div>
+
+  <div class="paper-card sketch settings-group">
+    <div class="paper-title hand">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M12 3l2.8 6 6.2.6-4.7 4.1 1.4 6.3L12 16.8 6.3 20l1.4-6.3L3 9.6l6.2-.6z"/></svg>
+      重点题总数
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">已标重点</div>
+        <div class="desc">西哲背诵题库、马哲原理背诵题库默认全标</div>
+      </div>
+      <div class="value" id="starCount">0</div>
+    </div>
+  </div>
+
+  <div class="paper-card sketch settings-group">
+    <div class="paper-title hand">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
+      打卡记录
+    </div>
+    <div class="settings-row">
+      <div class="info">
+        <div class="label">重置打卡记录</div>
+        <div class="desc">清空全部打卡天数，连续打卡归零</div>
+      </div>
+      <button class="btn small ghost" id="btnResetDaily">重置</button>
+    </div>
+  </div>
+
+  <div class="paper-card sketch settings-group">
+    <div class="paper-title hand">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      关于
+    </div>
+    <div class="settings-row">
+      <div class="info"><div class="label">作者</div></div>
+      <div class="value">略略略大王</div>
+    </div>
+    <div class="settings-row">
+      <div class="info"><div class="label">联系方式</div></div>
+      <div class="value">lueluelue@123.com</div>
+    </div>
+    <div class="settings-row">
+      <div class="info"><div class="label">版本</div></div>
+      <div class="value">v1.0</div>
+    </div>
+  </div>
+</div>
+
 <nav class="tabbar" id="tabbar">
   <div class="tab active" data-view="home">
     <svg viewBox="0 0 24 24" class="ic"><path d="M4 11l8-7 8 7M6 9.5V20h12V9.5"/></svg>
@@ -407,6 +531,10 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:po
     <svg viewBox="0 0 24 24" class="ic"><path d="M3 20h18M6 20V10M11 20V4M16 20v-9M21 20v-5"/></svg>
     进度
   </div>
+  <div class="tab" data-view="settings">
+    <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+    设置
+  </div>
 </nav>
 
 <script>
@@ -421,19 +549,74 @@ const DB_LIST = [
 ];
 const STORAGE_KEY = "tiku_record_v2";
 const THEME_KEY = "tiku_theme";
+const PREFS_KEY = "tiku_prefs";
+const DAILY_KEY = "tiku_daily";
+const RECENT_KEY = "tiku_recent";
+const SEARCH_HIST_KEY = "tiku_search_hist";
 const $ = id => document.getElementById(id);
 
-/* ================= 状态 ================= */
 const dbData = {};
 const selectedMap = {};
 let selectedTypes = new Set();
 let onlyUnreviewed = false, skipDoneInOrder = false;
 let currentQuestion = null;
-let session = null;   // {pool, mode, index, scopeName}
+let session = null;
 
-/* ================= 记录 ================= */
+/* ================= 记录 / 偏好 ================= */
 function loadRecord(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||{} }catch(e){ return {} } }
 function saveRecord(r){ localStorage.setItem(STORAGE_KEY, JSON.stringify(r)) }
+function loadPrefs(){ try{ return JSON.parse(localStorage.getItem(PREFS_KEY))||{} }catch(e){ return {} } }
+function savePrefs(p){ localStorage.setItem(PREFS_KEY, JSON.stringify(p)) }
+function loadDaily(){ try{ return JSON.parse(localStorage.getItem(DAILY_KEY))||{} }catch(e){ return {} } }
+function saveDaily(d){ localStorage.setItem(DAILY_KEY, JSON.stringify(d)) }
+function loadRecent(){ try{ return JSON.parse(localStorage.getItem(RECENT_KEY))||[] }catch(e){ return [] } }
+function saveRecent(r){ localStorage.setItem(RECENT_KEY, JSON.stringify(r.slice(0,10))) }
+function loadSearchHist(){ try{ return JSON.parse(localStorage.getItem(SEARCH_HIST_KEY))||[] }catch(e){ return [] } }
+function saveSearchHist(h){ localStorage.setItem(SEARCH_HIST_KEY, JSON.stringify(h.slice(0,5))) }
+
+function todayStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function addDailyCount(n=1){
+  const d = loadDaily(); const t = todayStr();
+  d[t] = (d[t]||0) + n; saveDaily(d);
+}
+function getDailyDone(){ const d = loadDaily(); return d[todayStr()]||0; }
+function calcStreak(){
+  const d = loadDaily(); let streak = 0; const cur = new Date();
+  for(let i=0;i<365;i++){
+    const key = `${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,"0")}-${String(cur.getDate()).padStart(2,"0")}`;
+    if(d[key] && d[key] > 0){ streak++; cur.setDate(cur.getDate()-1); }
+    else break;
+  }
+  return streak;
+}
+function pushRecent(qKey){
+  const arr = loadRecent().filter(k=>k!==qKey);
+  arr.unshift(qKey); saveRecent(arr);
+}
+function pushSearchHist(kw){
+  if(!kw) return;
+  const arr = loadSearchHist().filter(k=>k!==kw);
+  arr.unshift(kw); saveSearchHist(arr);
+}
+function findQByKey(qKey){
+  for(const item of DB_LIST){
+    if(!dbData[item.dbId]) continue;
+    const q = dbData[item.dbId].questions.find(x=>x.qKey===qKey);
+    if(q) return q;
+  }
+  return null;
+}
+function toggleStar(q){
+  const rec = loadRecord();
+  const key = q.qKey;
+  if(!rec[key]) rec[key] = {draw:0, review:0, star:false, lastReview:0};
+  rec[key].star = !rec[key].star;
+  q.star = rec[key].star;
+  saveRecord(rec);
+}
 
 /* ================= 主题 ================= */
 (function(){
@@ -464,15 +647,19 @@ function loadOneDb(item){
   const data = window.DB_DATA && window.DB_DATA[item.dbId];
   if(!data) throw new Error('缺少数据：' + item.name);
   const records = loadRecord();
+  const defaultStar = (item.dbId === "db1" || item.dbId === "db3");
   const qs=[], chapSet=new Set(), typeSet=new Set();
   for(const row of data.rows){
     const ch=(row["章节"]||"").trim(), tp=(row["题型"]||"").trim();
     const title=(row["题干"]||"").trim(), ans=(row["标准答案"]||"").trim();
     if(!title) continue;
     const qKey = `${item.dbId}||${ch}||${tp}||${title}`;
-    if(!records[qKey]) records[qKey]={draw:0,review:0};
+    if(!records[qKey]) records[qKey]={draw:0,review:0,star:defaultStar,lastReview:0};
+    if(records[qKey].star===undefined) records[qKey].star = defaultStar;
+    if(records[qKey].lastReview===undefined) records[qKey].lastReview = 0;
     qs.push({dbId:item.dbId, chapter:ch, type:tp, title, answer:ans,
-             qKey, draw:records[qKey].draw, review:records[qKey].review});
+             qKey, draw:records[qKey].draw, review:records[qKey].review,
+             star:records[qKey].star, lastReview:records[qKey].lastReview});
     if(ch) chapSet.add(ch);
     if(tp) typeSet.add(tp);
   }
@@ -481,9 +668,9 @@ function loadOneDb(item){
                      chapters:Array.from(chapSet), typeSet};
   selectedMap[item.dbId]=new Set();
 }
-async function loadAllDb(){
+function loadAllDb(){
   try{
-    for(const item of DB_LIST){ $("statusTip").textContent=`正在翻书加载：${item.name}`; await loadOneDb(item); }
+    for(const item of DB_LIST){ $("statusTip").textContent=`正在翻书加载：${item.name}`; loadOneDb(item); }
     $("statusTip").textContent="今天也要好好背书和吃汉堡包哦，还有要好好喝水和睡觉！";
     $("statusTip").className="status-tip ok";
     $("homeMain").style.display="block";
@@ -563,8 +750,34 @@ function renderTypeFilter(){
     wrap.appendChild(c);
   });
 }
-$("chkUnreviewed").onchange=e=>onlyUnreviewed=e.target.checked;
-$("chkSkipDone").onchange =e=>skipDoneInOrder =e.target.checked;
+
+/* 偏好初始化 */
+function initPrefs(){
+  const p = loadPrefs();
+  onlyUnreviewed  = !!p.onlyUnreviewed;
+  skipDoneInOrder = !!p.skipDoneInOrder;
+  $("chkUnreviewed").checked = onlyUnreviewed;
+  $("chkSkipDone").checked   = skipDoneInOrder;
+  $("chkAutoNext").checked   = !!p.autoNext;
+  $("inpDailyGoal").value    = p.dailyGoal || 30;
+}
+$("chkUnreviewed").onchange = e => {
+  onlyUnreviewed = e.target.checked;
+  const p = loadPrefs(); p.onlyUnreviewed = onlyUnreviewed; savePrefs(p);
+};
+$("chkSkipDone").onchange = e => {
+  skipDoneInOrder = e.target.checked;
+  const p = loadPrefs(); p.skipDoneInOrder = skipDoneInOrder; savePrefs(p);
+};
+$("chkAutoNext").onchange = e => {
+  const p = loadPrefs(); p.autoNext = e.target.checked; savePrefs(p);
+};
+$("inpDailyGoal").onchange = e => {
+  const v = Math.max(1, Math.min(500, parseInt(e.target.value) || 30));
+  e.target.value = v;
+  const p = loadPrefs(); p.dailyGoal = v; savePrefs(p);
+  renderDailyCard();
+};
 
 /* ================= 筛选与统计 ================= */
 function getFilteredQuestionPool(){
@@ -666,6 +879,10 @@ function showQ(q){
   const rec=loadRecord();
   rec[q.qKey].draw+=1; q.draw=rec[q.qKey].draw; saveRecord(rec);
 
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  isSpeaking = false;
+  $("btnSpeak").classList.remove("speaking");
+
   const dbInfo=DB_LIST.find(x=>x.dbId===q.dbId);
   $("qTags").innerHTML=
     `<span class="qtag t">${q.type}</span>
@@ -675,6 +892,7 @@ function showQ(q){
   $("qAnswer").textContent=q.answer;
   $("answerWrap").classList.remove("show");
   $("toggleAnswerLabel").textContent="看答案";
+  $("btnStar").classList.toggle("on", !!q.star);
   updateReviewUi();
   updateStudyProgress();
   const card=$("studyCard");
@@ -682,7 +900,6 @@ function showQ(q){
   card.style.animation="pop .3s ease";
 }
 
-/* 刷新“已背/取消”相关 UI */
 function updateReviewUi(){
   const q=currentQuestion; if(!q) return;
   $("qStat").textContent=`抽到 ${q.draw} 次 ｜ 背诵 ${q.review} 次`;
@@ -691,10 +908,15 @@ function updateReviewUi(){
   if(q.review>0){
     if(tag) tag.textContent=`已背 ${q.review} 次`;
     else $("qTags").insertAdjacentHTML("beforeend",`<span class="qtag done">已背 ${q.review} 次</span>`);
-  }else if(tag){
-    tag.remove();
+  }else if(tag){ tag.remove(); }
+
+  if(q.review>0){
+    $("markReviewLabel").textContent = "再次背完";
+    $("btnUnmarkReview").style.display = "";
+  }else{
+    $("markReviewLabel").textContent = "记住了";
+    $("btnUnmarkReview").style.display = "none";
   }
-  $("markReviewLabel").textContent = q.review>0 ? "取消标记" : "记住了";
 }
 
 function updateStudyProgress(){
@@ -715,24 +937,113 @@ $("btnToggleAnswer").onclick=()=>{
   $("toggleAnswerLabel").textContent = show?"收起来":"看答案";
 };
 
-/* 记住 / 取消记住 双向切换 */
 $("btnMarkReview").onclick=()=>{
   if(!currentQuestion) return;
   const rec=loadRecord();
   const key=currentQuestion.qKey;
-  if(!rec[key]) rec[key]={draw:0,review:0};
+  if(!rec[key]) rec[key]={draw:0,review:0,star:false,lastReview:0};
+  rec[key].review += 1;
+  rec[key].lastReview = Date.now();
+  currentQuestion.review = rec[key].review;
+  currentQuestion.lastReview = rec[key].lastReview;
+  saveRecord(rec);
 
-  if(rec[key].review>0){
-    rec[key].review=0;          // 取消标记
-  }else{
-    rec[key].review+=1;         // 标记已背
+  addDailyCount(1);
+  pushRecent(key);
+  renderDailyCard();
+  renderRecent();
+
+  updateReviewUi();
+  updateStudyProgress();
+  refreshAll();
+
+  const p = loadPrefs();
+  if(p.autoNext){
+    setTimeout(()=>{ if($("view-study").classList.contains("active")) nextQuestion(); }, 600);
   }
-  currentQuestion.review=rec[key].review;
+};
+
+$("btnUnmarkReview").onclick=()=>{
+  if(!currentQuestion) return;
+  if(!confirm("确定取消这道题的背诵标记吗？")) return;
+  const rec=loadRecord();
+  const key=currentQuestion.qKey;
+  if(!rec[key]) rec[key]={draw:0,review:0,star:false,lastReview:0};
+  rec[key].review = 0;
+  rec[key].lastReview = 0;
+  currentQuestion.review = 0;
+  currentQuestion.lastReview = 0;
   saveRecord(rec);
   updateReviewUi();
   updateStudyProgress();
   refreshAll();
 };
+
+/* ================= 星标 / 朗读 ================= */
+$("btnStar").onclick=()=>{
+  if(!currentQuestion) return;
+  toggleStar(currentQuestion);
+  $("btnStar").classList.toggle("on", !!currentQuestion.star);
+  refreshAll();
+  renderStarCount();
+};
+/* 朗读：点一下开始，再点一下停止 */
+let isSpeaking = false;
+function stopSpeak(){
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  isSpeaking = false;
+  $("btnSpeak").classList.remove("speaking");
+}
+$("btnSpeak").onclick=()=>{
+  if(!currentQuestion) return;
+  if(!("speechSynthesis" in window)){ alert("当前浏览器不支持语音朗读"); return; }
+  if(isSpeaking){ stopSpeak(); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(currentQuestion.title + "。" + (currentQuestion.answer||""));
+  u.lang = "zh-CN"; u.rate = 1.0; u.pitch = 1.0;
+  u.onend = stopSpeak;
+  u.onerror = stopSpeak;
+  isSpeaking = true;
+  $("btnSpeak").classList.add("speaking");
+  window.speechSynthesis.speak(u);
+};
+
+/* ================= 首页每日任务 / 最近背过 ================= */
+function renderDailyCard(){
+  const p = loadPrefs();
+  const goal = p.dailyGoal || 30;
+  const done = getDailyDone();
+  $("dailyDone").textContent = done;
+  $("dailyGoalTxt").textContent = goal;
+  $("dailyStreak").textContent = `连续打卡 ${calcStreak()} 天`;
+}
+
+function renderRecent(){
+  if(!dbData[DB_LIST[0].dbId]) return;
+  const list = loadRecent();
+  const card = $("recentCard");
+  const strip = $("recentStrip");
+  if(!list.length){ card.style.display = "none"; return; }
+  card.style.display = "";
+  strip.innerHTML = "";
+  list.forEach(qKey => {
+    const q = findQByKey(qKey);
+    if(!q) return;
+    const el = document.createElement("div");
+    el.className = "recent-item";
+    el.innerHTML = `<div class="t">${q.title}</div><div style="color:var(--ink-soft)">已背 ${q.review} 次</div>`;
+    el.onclick = () => {
+      const recentQs = loadRecent().map(findQByKey).filter(Boolean);
+      if(!recentQs.length) return;
+      session = {pool: recentQs, mode:"order", index:0, scopeName:"最近背过"};
+      $("studyScope").textContent = session.scopeName;
+      setModeTabs("order");
+      showView("study");
+      nextQuestion(true);
+    };
+    strip.appendChild(el);
+  });
+}
 
 /* ================= 进度页 ================= */
 function renderProgress(){
@@ -775,27 +1086,22 @@ function renderProgress(){
   $("pgTotalLabel").textContent=`全部题库（${DB_LIST.length} 套）`;
 }
 
-/* 单条进度清零：dbId + chapter（章节为空则整个题库） */
 function resetProgress(dbId, chapter){
   const d=dbData[dbId]; if(!d) return;
   const targets = chapter ? d.questions.filter(q=>q.chapter===chapter) : d.questions;
   if(!targets.length) return;
-
   const rec=loadRecord();
   targets.forEach(q=>{
-    if(!rec[q.qKey]) rec[q.qKey]={draw:0,review:0};
-    rec[q.qKey].review = 0;   // 只清背诵进度，保留抽题次数
+    if(!rec[q.qKey]) rec[q.qKey]={draw:0,review:0,star:false,lastReview:0};
+    rec[q.qKey].review = 0;
     q.review = 0;
   });
   saveRecord(rec);
-
-  refreshAll();          // 首页统计 + 章节计数
-  renderProgress();      // 进度页重绘
+  refreshAll(); renderProgress();
   if(session) updateStudyProgress();
   if(currentQuestion && targets.indexOf(currentQuestion) > -1) updateReviewUi();
 }
 
-/* 事件委托：进度页的清零按钮 */
 $("pgList").addEventListener("click", e=>{
   const btn = e.target.closest(".mini-reset");
   if(!btn) return;
@@ -807,18 +1113,12 @@ $("pgList").addEventListener("click", e=>{
   resetProgress(dbId, ch);
 });
 
-document.querySelector('.tab[data-view="progress"]').addEventListener("click", renderProgress);
-
-/* 全部清空 */
 $("btnReset").onclick=()=>{
   if(!confirm("确定清空所有背诵记录吗？此操作不可恢复！")) return;
   localStorage.removeItem(STORAGE_KEY);
   DB_LIST.forEach(i=>dbData[i.dbId].questions.forEach(q=>{q.draw=0;q.review=0;}));
   refreshAll(); renderProgress(); updateStudyProgress();
-  if(currentQuestion){
-    currentQuestion.draw=0; currentQuestion.review=0;
-    updateReviewUi();
-  }
+  if(currentQuestion){ currentQuestion.draw=0; currentQuestion.review=0; updateReviewUi(); }
   alert("背诵记录已清空，重新开始吧");
 };
 
@@ -833,29 +1133,24 @@ document.addEventListener("keydown",e=>{
 /* ================= 浏览页 ================= */
 let browseDbId = null;
 let browseChapter = null;
+let browseChapterOpen = false;
 
 function renderBrowse(){
-  // 题库 chips
   const dbChips = $("browseDbChips");
-  dbChips.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">题库</span>';
+    dbChips.innerHTML = '';
   DB_LIST.forEach(item => {
     const chip = document.createElement("span");
     chip.className = "chip" + (browseDbId === item.dbId ? " on" : "");
     chip.textContent = item.name;
-    chip.onclick = () => {
-      browseDbId = item.dbId;
-      browseChapter = null;
-      renderBrowse();
-    };
+    chip.onclick = () => { browseDbId = item.dbId; browseChapter = null; renderBrowse(); };
     dbChips.appendChild(chip);
   });
-
-  // 默认选题库
   if (!browseDbId && DB_LIST.length) browseDbId = DB_LIST[0].dbId;
 
-  // 章节 chips
-  const chChips = $("browseChChips");
-  chChips.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">章节</span>';
+    const chChips = $("browseChChips");
+  chChips.style.display = browseChapterOpen ? "flex" : "none";
+  $("browseChToggle").classList.toggle("open", browseChapterOpen);
+  chChips.innerHTML = "";
   const db = dbData[browseDbId];
   if (db) {
     db.chapters.forEach(ch => {
@@ -870,14 +1165,11 @@ function renderBrowse(){
     });
   }
 
-  // 题目列表
   const list = $("browseList");
   list.innerHTML = "";
   if (!db) return;
-
   let qs = db.questions;
   if (browseChapter) qs = qs.filter(q => q.chapter === browseChapter);
-
   if (!qs.length) {
     list.innerHTML = '<div class="big-empty"><div class="hand">这里还没有题目</div></div>';
     return;
@@ -886,6 +1178,7 @@ function renderBrowse(){
   qs.forEach((q, idx) => {
     const card = document.createElement("div");
     card.className = "paper-card sketch browse-q";
+    card.dataset.qkey = q.qKey;
     card.innerHTML = `
       <div class="q-tags">
         <span class="qtag t">${q.type}</span>
@@ -894,17 +1187,80 @@ function renderBrowse(){
       </div>
       <div class="browse-title">${idx + 1}. ${q.title}</div>
       <div class="browse-answer">${q.answer}</div>
-      <button class="btn small primary browse-toggle">展开答案</button>
+      <div class="browse-actions">
+        <button class="btn small primary browse-toggle">展开答案</button>
+        <button class="btn small good browse-inc">${q.review > 0 ? '再次背完' : '记住了'}</button>
+        ${q.review > 0 ? '<button class="btn small ghost browse-unmark">取消标记</button>' : ''}
+        <button class="star-btn ${q.star?'on':''} browse-star" title="重点">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.8 6 6.2.6-4.7 4.1 1.4 6.3L12 16.8 6.3 20l1.4-6.3L3 9.6l6.2-.6z"/></svg>
+        </button>
+        <span class="browse-badge">已背 <b>${q.review}</b> 次</span>
+      </div>
     `;
-    const answerEl = card.querySelector(".browse-answer");
-    const btn = card.querySelector(".browse-toggle");
-    btn.onclick = () => {
-      const show = answerEl.classList.toggle("show");
-      btn.textContent = show ? "收起答案" : "展开答案";
-    };
     list.appendChild(card);
   });
 }
+
+$("browseChToggle").onclick = () => {
+  browseChapterOpen = !browseChapterOpen;
+  renderBrowse();
+};
+
+$("browseList").addEventListener("click", e => {
+  const card = e.target.closest(".browse-q");
+  if (!card) return;
+  const qKey = card.dataset.qkey;
+  if (!qKey) return;
+  const target = findQByKey(qKey);
+  if (!target) return;
+
+  const toggleBtn = e.target.closest(".browse-toggle");
+  const incBtn    = e.target.closest(".browse-inc");
+  const unmarkBtn = e.target.closest(".browse-unmark");
+  const starBtn   = e.target.closest(".browse-star");
+
+  if (toggleBtn) {
+    const answerEl = card.querySelector(".browse-answer");
+    const show = answerEl.classList.toggle("show");
+    toggleBtn.textContent = show ? "收起答案" : "展开答案";
+    return;
+  }
+  if (starBtn) {
+    toggleStar(target);
+    starBtn.classList.toggle("on", !!target.star);
+    renderStarCount();
+    return;
+  }
+
+  const rec = loadRecord();
+  const key = target.qKey;
+  if (!rec[key]) rec[key] = { draw: 0, review: 0, star:false, lastReview:0 };
+
+  if (incBtn) {
+    rec[key].review += 1;
+    rec[key].lastReview = Date.now();
+    target.review = rec[key].review;
+    target.lastReview = rec[key].lastReview;
+    saveRecord(rec);
+    addDailyCount(1);
+    pushRecent(key);
+    renderDailyCard(); renderRecent();
+    refreshAll();
+    renderBrowse();
+    return;
+  }
+  if (unmarkBtn) {
+    if (!confirm("确定取消这道题的背诵标记吗？")) return;
+    rec[key].review = 0;
+    rec[key].lastReview = 0;
+    target.review = 0;
+    target.lastReview = 0;
+    saveRecord(rec);
+    refreshAll();
+    renderBrowse();
+    return;
+  }
+});
 
 /* ================= 搜索页 ================= */
 let searchScope = "all";
@@ -912,13 +1268,11 @@ let searchScope = "all";
 function renderSearchScope(){
   const wrap = $("searchScopeChips");
   wrap.innerHTML = '<span style="font-size:13px;color:var(--ink-soft)">范围</span>';
-
   const allChip = document.createElement("span");
   allChip.className = "chip" + (searchScope === "all" ? " on" : "");
   allChip.textContent = "全部题库";
   allChip.onclick = () => { searchScope = "all"; renderSearchScope(); doSearch(); };
   wrap.appendChild(allChip);
-
   DB_LIST.forEach(item => {
     const chip = document.createElement("span");
     chip.className = "chip" + (searchScope === item.dbId ? " on" : "");
@@ -932,28 +1286,27 @@ function doSearch(){
   const kw = $("searchInput").value.trim();
   const wrap = $("searchResults");
   wrap.innerHTML = "";
-
   if (!kw) {
     wrap.innerHTML = '<div class="big-empty"><div class="hand">输入关键词开始搜索</div><div>会同时匹配题干和答案</div></div>';
     return;
   }
-
   const lowerKw = kw.toLowerCase();
   let pool = [];
   DB_LIST.forEach(item => {
     if (searchScope !== "all" && searchScope !== item.dbId) return;
     pool = pool.concat(dbData[item.dbId].questions);
   });
-
   const matches = pool.filter(q =>
     q.title.toLowerCase().includes(lowerKw) ||
     q.answer.toLowerCase().includes(lowerKw)
   );
-
   if (!matches.length) {
     wrap.innerHTML = '<div class="big-empty"><div class="hand">没有找到匹配的题目</div><div>换个关键词试试</div></div>';
+    pushSearchHist(kw); renderSearchHistory();
     return;
   }
+  pushSearchHist(kw);
+  renderSearchHistory();
 
   const summary = document.createElement("div");
   summary.style.cssText = "font-size:13px;color:var(--ink-soft);margin-bottom:10px";
@@ -964,6 +1317,7 @@ function doSearch(){
     const dbInfo = DB_LIST.find(x => x.dbId === q.dbId);
     const card = document.createElement("div");
     card.className = "paper-card sketch browse-q";
+    card.dataset.qkey = q.qKey;
     card.innerHTML = `
       <div class="q-tags">
         <span class="qtag d">${dbInfo.name}</span>
@@ -973,7 +1327,12 @@ function doSearch(){
       </div>
       <div class="browse-title">${idx + 1}. ${q.title}</div>
       <div class="browse-answer">${q.answer}</div>
-      <button class="btn small primary browse-toggle">展开答案</button>
+      <div class="browse-actions">
+        <button class="btn small primary browse-toggle">展开答案</button>
+        <button class="star-btn ${q.star?'on':''} search-star" title="重点">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.8 6 6.2.6-4.7 4.1 1.4 6.3L12 16.8 6.3 20l1.4-6.3L3 9.6l6.2-.6z"/></svg>
+        </button>
+      </div>
     `;
     const answerEl = card.querySelector(".browse-answer");
     const btn = card.querySelector(".browse-toggle");
@@ -981,11 +1340,16 @@ function doSearch(){
       const show = answerEl.classList.toggle("show");
       btn.textContent = show ? "收起答案" : "展开答案";
     };
+    const starBtn = card.querySelector(".search-star");
+    starBtn.onclick = () => {
+      toggleStar(q);
+      starBtn.classList.toggle("on", !!q.star);
+      renderStarCount();
+    };
     wrap.appendChild(card);
   });
 }
 
-// 搜索输入防抖
 let searchTimer = null;
 document.addEventListener("input", e => {
   if (e.target.id === "searchInput") {
@@ -994,18 +1358,115 @@ document.addEventListener("input", e => {
   }
 });
 
-// 点击 tab 时初始化视图
+function renderSearchHistory(){
+  const hist = loadSearchHist();
+  const wrap = $("searchHistory");
+  wrap.innerHTML = "";
+  hist.forEach(kw => {
+    const chip = document.createElement("span");
+    chip.className = "hist-chip";
+    chip.textContent = kw;
+    chip.onclick = () => { $("searchInput").value = kw; doSearch(); };
+    wrap.appendChild(chip);
+  });
+}
+
+/* ================= 星标总数 / 导出导入 ================= */
+function renderStarCount(){
+  let n = 0;
+  DB_LIST.forEach(item => {
+    dbData[item.dbId].questions.forEach(q => { if(q.star) n++; });
+  });
+  $("starCount").textContent = n + " 道";
+}
+
+$("btnExport").onclick = () => {
+  const data = {
+    record: loadRecord(),
+    prefs: loadPrefs(),
+    daily: loadDaily(),
+    recent: loadRecent(),
+    searchHist: loadSearchHist(),
+    exportedAt: new Date().toISOString(),
+    version: 1
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `tiku_backup_${stamp}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+$("btnImport").onclick = () => $("fileImport").click();
+$("fileImport").onchange = e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!confirm("导入会覆盖当前所有记录，确定继续？")) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(data.record) localStorage.setItem(STORAGE_KEY, JSON.stringify(data.record));
+      if(data.prefs) localStorage.setItem(PREFS_KEY, JSON.stringify(data.prefs));
+      if(data.daily) localStorage.setItem(DAILY_KEY, JSON.stringify(data.daily));
+      if(data.recent) localStorage.setItem(RECENT_KEY, JSON.stringify(data.recent));
+      if(data.searchHist) localStorage.setItem(SEARCH_HIST_KEY, JSON.stringify(data.searchHist));
+      alert("导入成功，即将重新加载");
+      location.reload();
+    }catch(err){
+      alert("导入失败：文件格式错误");
+      console.error(err);
+    }
+  };
+  reader.readAsText(file);
+};
+
+/* ================= tab 切换时初始化 ================= */
 document.querySelectorAll(".tab").forEach(t => {
   const orig = t.onclick;
   t.onclick = () => {
     if (orig) orig();
     if (t.dataset.view === "browse") renderBrowse();
-    if (t.dataset.view === "search") { renderSearchScope(); doSearch(); }
+    if (t.dataset.view === "search") { renderSearchScope(); renderSearchHistory(); doSearch(); }
     if (t.dataset.view === "progress") renderProgress();
+    if (t.dataset.view === "settings") renderStarCount();
   };
 });
 
+/* ================= 初始化 ================= */
+initPrefs();
+renderDailyCard();
+renderSearchHistory();
 loadAllDb();
+renderRecent();
+
+/* 清除「最近背过」 */
+$("btnClearRecent").onclick = () => {
+  if(!confirm("确定清空「最近背过」记录吗？")) return;
+  localStorage.removeItem(RECENT_KEY);
+  renderRecent();
+};
+
+/* 重置打卡记录 */
+$("btnResetDaily").onclick = () => {
+  if(!confirm("确定清空所有打卡记录吗？连续天数会归零。")) return;
+  localStorage.removeItem(DAILY_KEY);
+  renderDailyCard();
+  alert("打卡记录已重置");
+};
+
+/* 跨天自动刷新（过 24 点后自动识别新一天） */
+let lastDay = todayStr();
+setInterval(() => {
+  const now = todayStr();
+  if(now !== lastDay){
+    lastDay = now;
+    renderDailyCard();
+  }
+}, 60000);
 </script>
 </body>
 </html>
